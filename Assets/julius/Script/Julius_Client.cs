@@ -26,22 +26,22 @@ public class Julius_Client : MonoBehaviour {
 
 	//初期設定用
 	public			bool			windowtype_hidden	= false;
-	public 			string 			IPAddress 			= "localhost";
-	public 			int 			port				= 10500;
-	public 			string			command				= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
+	public 			string 			IPAddress 		= "localhost";
+	public 			int 			port			= 10500;
+	public 			string			command			= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
 	public			float			vol					= 0f;
 
 	//TCP/IP用
-	private 	   	bool 			connect 			= false;
-	private static 	TcpClient 		tcpip 				= null;
-	private static 	NetworkStream 	net;
-	private static 	string 			stream;
+	private 	   	bool 			connect 		= false;
+	private static 		TcpClient 		tcpip 			= null;
+	private static 		NetworkStream 		net;
+	private static 		string 			stream;
 
 	//XML処理用
-	public 	static 	string 			tmp_s 				= "HogeHoge";
-	private static 	byte[] 			data 				= new byte[10000];
-	private static	Match 			sampling;
-	private static 	Regex 			xml_data;
+	public 	static 		string 			tmp_s 			= "HogeHoge";
+	private static 		byte[] 			data 			= new byte[10000];
+	private static		Match 			sampling;
+	private static 		Regex 			xml_data;
 
 	//外部プログラム用
 	private System.Diagnostics.Process ps;
