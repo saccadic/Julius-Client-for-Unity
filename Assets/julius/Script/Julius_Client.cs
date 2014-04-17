@@ -70,7 +70,7 @@ public class Julius_Client : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator start_julius(){
+	private IEnumerator start_julius_client(){
 		Debug.Log ("Julius");
 		yield return new WaitForSeconds(1);	//juliusサーバーが起動するまで時間があるので少し待つ
 		Debug.Log ("START:Julius");
@@ -180,7 +180,7 @@ public class Julius_Client : MonoBehaviour {
 		run_julius_server ();
 
 		//juliusシステムの起動
-		StartCoroutine("start_julius");
+		StartCoroutine("start_julius_client");
 	}
 	
 	// Update is called once per frame
