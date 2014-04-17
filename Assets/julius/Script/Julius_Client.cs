@@ -88,7 +88,7 @@ public class Julius_Client : MonoBehaviour {
 		ps = System.Diagnostics.Process.Start(info);
 	}
 
-	private void run_recording(){
+	private void start_recording(){
 		audio.clip = Microphone.Start (null,true,999,44100);
 		audio.loop = true;
 		audio.mute = true;
@@ -174,7 +174,7 @@ public class Julius_Client : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
-		run_recording ();
+		start_recording ();
 
 		//juliusサーバーを起動
 		run_julius_server ();
