@@ -4,8 +4,13 @@
 <strong>使用ライブラリ</strong><br>
 Julius v4.3.1 <a href = "http://julius.sourceforge.jp/">リンク</a><br>
 <br>
+<strong>初めに</strong><br>
+全てにおいて初心者ですのでアドバイスを頂ければ助かります。アドバイスは@Savant_Catに送ってくださると嬉しいです。<br>
+スクリプトのライセンスはフリー<br>
+Juliusのライセンスは<a href ="http://julius.sourceforge.jp/index.php?q=license.html">こちらに従います</a>
+<br>
 <strong>概要</strong><br>
-Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントパッケージ<br>
+Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントパッケージ (Windows専用)<br>
 <br>
 <strong>機能</strong><br>
 1.juliusをuntiy側からmoduleモードで起動する<br>
@@ -19,11 +24,9 @@ Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントパ�
 <li>Editor拡張をして使いやすく</li>
 <li>変数名、関数名の見直し</li>
 <li>文字列に対して条件分岐する簡単なスクリプトの作成</li>
+<li>windows専用なので他のOSでも動くようにする</li>
 </ul>
 <br>
 
-<strong>最後に</strong><br>
-全てにおいて初心者ですのでアドバイスを頂ければ助かります。<br>
-スクリプトのライセンスはフリー<br>
-Juliusのライセンスは<a href ="http://julius.sourceforge.jp/index.php?q=license.html">こちらに従います</a>
+
 
