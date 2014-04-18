@@ -1,5 +1,6 @@
 ﻿/********************************************************* 
-*Katuyoshi Hotta
+*Author : Katuyoshi Hotta
+*Twitter : @Savant_Cat
 *
 *
 *             Julius client for Unity v1.2
