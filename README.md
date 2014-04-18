@@ -25,5 +25,5 @@ Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントパ�
 <strong>最後に</strong><br>
 全てにおいて初心者ですのでアドバイスを頂ければ助かります。<br>
 スクリプトのライセンスはフリー<br>
-Juliusのライセンスは
+Juliusのライセンスは<a href ="http://julius.sourceforge.jp/index.php?q=license.html">こちらに従います<\a>
 
