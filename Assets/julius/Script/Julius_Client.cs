@@ -30,7 +30,7 @@ public class Julius_Client : MonoBehaviour {
 	public 			string 			IPAddress 		= "localhost";
 	public 			int 			port			= 10500;
 	public 			string			command			= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
-	public			float			vol					= 0f;
+	public			int			wait_time
 
 	//TCP/IP用
 	private 	   	bool 			connect 		= false;
@@ -45,18 +45,38 @@ public class Julius_Client : MonoBehaviour {
 	private static 		Regex 			xml_data;
 
 	//外部プログラム用
-	private System.Diagnostics.Process ps;
+	private System.Diagnostics.Process julius_process;
 
 	//マルチスレッド用
-	private Thread julius_client;
+	private Thread julius_thread;
 
 	//--------------------------------------------------
 	
+	/*外部プログラムjuliusをコマンド付きで起動*/
+	private void run_julius_server(){
+		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
+		info.FileName="julius_server.exe";
+		info.WorkingDirectory = @".\Assets\julius\core";
+		info.Arguments = command;
+		if(windowtype_hidden){
+			info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+		}
+		//juliusプロセスをjulius_processに登録
+		julius_process = System.Diagnostics.Process.Start(info);
+	}
+	
+	/*外部プログラムjulisのプロセスを強制終了*/
+	private void kill_julius_server(){
+		//プロセスの強制終了
+		julius_process.Kill();
+		Debug.Log("Kill julius server.");
+	}
+	
 	/*juliusサーバーへ接続する*/
-	private bool start_julius_client(){
+	private bool initialize_julius_client(){
 		//TCP/IPの初期化＆juliusサーバーへ接続
 		tcpip = new TcpClient(IPAddress,port);
-		//tcpopが取得出来たかどうか
+		//クライアントが取得出来たかどうか
 		if (tcpip == null) {
 			Debug.Log("Connect Fall.");
 			return false;
@@ -65,73 +85,30 @@ public class Julius_Client : MonoBehaviour {
 			//ストリームの取得
 			net = tcpip.GetStream ();
 			//マルチスレッドへ登録＆開始
-			julius_client = new Thread (new ThreadStart (get_stream));
-			julius_client.Start ();
+			julius_thread = new Thread (new ThreadStart (get_stream));
+			julius_thread.Start ();
 			return true;
 		}
 	}
+	
+	/*juliusサーバーから切断*/
+	private void close_julius(){
+		//TCP/IPの切断処理
+		net.Close();
+		//juliusサーバーのプロセスを強制終了
+		kill_julius_server ();
+	}
 
-	private IEnumerator run_julius_client(){
-		Debug.Log ("Julius");
-		yield return new WaitForSeconds(1);	//juliusサーバーが起動するまで時間があるので少し待つ
-		Debug.Log ("START:Julius");
+	/*サーバーが起動するまで時間があるので少し待つ*/
+	private IEnumerator run_julius_server(){
+		Debug.Log ("Julius Initialize...");
+		yield return new WaitForSeconds(wait_time);
+		Debug.Log ("START JuliusSystem!");
 		connect = start_julius_client();
 	}
-
-	private void run_julius_server(){//外部プログラムjulisuをコマンド付きで起動
-		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
-		info.FileName="julius_server.exe";
-		info.WorkingDirectory = @".\Assets\julius\core";
-		info.Arguments = command;
-		if(windowtype_hidden){
-			info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-		}
-		ps = System.Diagnostics.Process.Start(info);
-	}
-
-	private void start_recording(){
-		audio.clip = Microphone.Start (null,true,999,44100);
-		audio.loop = true;
-		audio.mute = true;
-		while (!(Microphone.GetPosition("") > 0)){}             // マイクが取れるまで待つ。空文字でデフォルトのマイクを探してくれる
-		audio.Play();  
-	}
-
-	private float GetAveragedVolume()
-	{ 
-		float[] data = new float[256];
-		float a = 0;
-		audio.GetOutputData(data,0);
-		foreach(float s in data)
-		{
-			a += Mathf.Abs(s);
-		}
-		return a/256.0f;
-	}
 	
-	private void kill_julius_server(){//外部プログラムjulisのプロセスを強制終了
-		ps.Kill ();
-		Debug.Log("Kill julius server.");
-	}
 	
-	private static string XML_search(string stream){
-		xml_data = new Regex("WORD=\"([^\"]+)\"");//正規表現
-		sampling = xml_data.Match(stream);//第一抽出
-
-		while(sampling.Success){//最後まで抽出
-			//Debug.Log(sampling.Groups.Count);
-
-			//結合処理
-			for(int i = 1;i<sampling.Groups.Count;i++){//なぜi = 1にしたらうまく行った
-				tmp_s += sampling.Groups[i].Value;
-				//Debug.Log(sampling.Groups[i].Value);
-			}
-
-			sampling = sampling.NextMatch();//順次抽出していく
-		}
-		return tmp_s;//最終的に結合した文字列を返す
-	}
-
+	//-----------------------------Stream----------------------------------
 	/*juliusサーバーから受信*/
 	private static void get_stream(){//**マルチスレッド関数**
 		while(true){
@@ -159,39 +136,53 @@ public class Julius_Client : MonoBehaviour {
 		Debug.Log ("Send Message -> "+msg);
 	}
 
-	//juliusサーバーから切断
-	private void close_julius(){
-		net.Close();//tcp/ipの切断処理
-		kill_julius_server ();//juliusサーバーのプロセスを強制終了
+	/*ストリーム情報から正規表現を利用して文字列を抽出する*/
+	private static string XML_search(string stream){
+		//正規表現
+		xml_data = new Regex("WORD=\"([^。\"]+)\"");
+		//初回抽出(NextMatch()を使うため)
+		sampling = xml_data.Match(stream);
+		while(sampling.Success){//最後まで抽出
+			//結合処理
+			for(int i = 1;i<sampling.Groups.Count;i++){//なぜかi = 1にしたらうまく行った
+				tmp_s += sampling.Groups[i].Value;
+			}
+			//順次抽出していく
+			sampling = sampling.NextMatch();
+		}
+		//最終的に結合した文字列を返す
+		return tmp_s;
 	}
+	//---------------------------------------------------------------------
 	
-	//終了処理と同時に実行される
-	void OnApplicationQuit() {
-		if (connect) {
-			close_julius();//サーバーの切断
-			julius_client.Abort(); 
-		}//マルチスレッドの終了
-	}
-	
+	//----------------------Main---------------------------
 	// Use this for initialization
 	void Start() {
-		start_recording ();
-
 		//juliusサーバーを起動
 		run_julius_server ();
 
 		//juliusシステムの起動
-		StartCoroutine("run_julius_client");
+		StartCoroutine("run_julius_server");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//結果を常に受け取る
 		if (connect) {
-			vol = GetAveragedVolume();
 			Result = tmp_s;
 		} else {
 			Debug.Log("not conect.");
 		}
 	}
+
+	//終了処理と同時に実行される
+	void OnApplicationQuit() {
+		if (connect) {
+			//juliusサーバーを切断
+			close_julius();
+			//マルチスレッドの終了
+			julius_thread.Abort(); 
+		}
+	}
+	//-----------------------------------------------------
 }
