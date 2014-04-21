@@ -17,43 +17,44 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Text;
 
-
-[RequireComponent(typeof(AudioClip))]
 public class Julius_Client : MonoBehaviour {
 	//--------------------------------------------------
-
+	
 	//juliusからの結果用
 	public string 	Result;
 
 	//初期設定用
+	public			microphone		mic = null;
 	public			bool			windowtype_hidden	= false;
 	public 			string 			IPAddress 		= "localhost";
 	public 			int 			port			= 10500;
 	public 			string			command			= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
-	public			int			wait_time
-
-	//TCP/IP用
-	private 	   	bool 			connect 		= false;
+	public			float			wait_time 		= 1;
+	public			float			timer 			= 0;
+		
+		//TCP/IP用
+	private 		   	bool 			connect 		= false;
 	private static 		TcpClient 		tcpip 			= null;
 	private static 		NetworkStream 		net;
 	private static 		string 			stream;
-
+	
 	//XML処理用
 	public 	static 		string 			tmp_s 			= "HogeHoge";
 	private static 		byte[] 			data 			= new byte[10000];
 	private static		Match 			sampling;
 	private static 		Regex 			xml_data;
-
+	
 	//外部プログラム用
 	private System.Diagnostics.Process julius_process;
-
+	
 	//マルチスレッド用
 	private Thread julius_thread;
-
-	//--------------------------------------------------
 	
+	//--------------------------------------------------
+
+	//---------------------------------julius.exe-------------------------------------------
 	/*外部プログラムjuliusをコマンド付きで起動*/
-	private void run_julius_server(){
+	private void open_julius_server(){
 		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
 		info.FileName="julius_server.exe";
 		info.WorkingDirectory = @".\Assets\julius\core";
@@ -98,19 +99,19 @@ public class Julius_Client : MonoBehaviour {
 		//juliusサーバーのプロセスを強制終了
 		kill_julius_server ();
 	}
-
+	
 	/*サーバーが起動するまで時間があるので少し待つ*/
-	private IEnumerator run_julius_server(){
+	private IEnumerator start_julius_server(){
 		Debug.Log ("Julius Initialize...");
 		yield return new WaitForSeconds(wait_time);
 		Debug.Log ("START JuliusSystem!");
-		connect = start_julius_client();
+		connect = initialize_julius_client();
 	}
-	
+	//--------------------------------------------------------------------
 	
 	//-----------------------------Stream----------------------------------
 	/*juliusサーバーから受信*/
-	private static void get_stream(){//**マルチスレッド関数**
+	private void get_stream(){//**マルチスレッド関数**
 		while(true){
 			//マルチスレッドの速度？
 			Thread.Sleep(0);
@@ -118,15 +119,15 @@ public class Julius_Client : MonoBehaviour {
 			net.Read(data, 0, data.Length);
 			stream = System.Text.Encoding.Default.GetString(data);
 			//Debug.Log (stream);
-
+			
 			Debug.Log ("tmp_s : "+tmp_s);
 			tmp_s = "";//初期化
-
+			
 			//XMLデータから文字列の抽出
 			tmp_s = XML_search(stream);
 		}
 	}
-
+	
 	/*juliusサーバーへ送信*/
 	private void send_stream(string msg){
 		//net = tcpip.GetStream ();
@@ -135,9 +136,9 @@ public class Julius_Client : MonoBehaviour {
 		net.Write(send_byte,0,send_byte.Length);
 		Debug.Log ("Send Message -> "+msg);
 	}
-
+	
 	/*ストリーム情報から正規表現を利用して文字列を抽出する*/
-	private static string XML_search(string stream){
+	private string XML_search(string stream){
 		//正規表現
 		xml_data = new Regex("WORD=\"([^。\"]+)\"");
 		//初回抽出(NextMatch()を使うため)
@@ -154,27 +155,42 @@ public class Julius_Client : MonoBehaviour {
 		return tmp_s;
 	}
 	//---------------------------------------------------------------------
-	
+
+	private void timer_reset(){
+		timer = 0f;
+	}
+
 	//----------------------Main---------------------------
 	// Use this for initialization
 	void Start() {
 		//juliusサーバーを起動
-		run_julius_server ();
-
+		open_julius_server();
+		
 		//juliusシステムの起動
-		StartCoroutine("run_julius_server");
+		StartCoroutine("start_julius_server");
 	}
-	
+
+	private string tmp = "";
+
 	// Update is called once per frame
 	void Update () {
 		//結果を常に受け取る
 		if (connect) {
+			if(tmp == tmp_s){
+				timer += Time.deltaTime;
+				if(timer >= 5f){
+					tmp_s = "";
+				}
+			}else{
+				tmp = tmp_s;
+				timer = 0;
+			}
 			Result = tmp_s;
 		} else {
 			Debug.Log("not conect.");
 		}
 	}
-
+	
 	//終了処理と同時に実行される
 	void OnApplicationQuit() {
 		if (connect) {
