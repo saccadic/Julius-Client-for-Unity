@@ -148,7 +148,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: a608f28554f6f9149b13b454bdf234b9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -232.410004
+      value: -192.343292
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a608f28554f6f9149b13b454bdf234b9, type: 2}
       propertyPath: m_LocalPosition.y
@@ -178,6 +178,10 @@ Prefab:
       propertyPath: mic
       value: 
       objectReference: {fileID: 1701621123}
+    - target: {fileID: 11400000, guid: a608f28554f6f9149b13b454bdf234b9, type: 2}
+      propertyPath: offset_size
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a608f28554f6f9149b13b454bdf234b9, type: 2}
   m_RootGameObject: {fileID: 1416235333}
@@ -222,6 +226,14 @@ Prefab:
       propertyPath: mic
       value: 
       objectReference: {fileID: 1701621123}
+    - target: {fileID: 11400000, guid: b9663b4f7ff04a04e92c99600bbf3326, type: 2}
+      propertyPath: max
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: b9663b4f7ff04a04e92c99600bbf3326, type: 2}
+      propertyPath: min
+      value: -100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9663b4f7ff04a04e92c99600bbf3326, type: 2}
   m_RootGameObject: {fileID: 1444238045}
@@ -363,7 +375,7 @@ MonoBehaviour:
   obj: {fileID: 100000, guid: 47d603f786dac3e43a6e393b8f9625ae, type: 2}
   spectrum: []
   margin: 1
-  offset_size: 1000
+  offset_size: 10000
 --- !u!4 &1416235336
 Transform:
   m_ObjectHideFlags: 0
@@ -371,7 +383,7 @@ Transform:
   m_PrefabInternal: {fileID: 992425872}
   m_GameObject: {fileID: 1416235333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -232.410004, y: 0, z: 218.611084}
+  m_LocalPosition: {x: -192.343292, y: 0, z: 218.611084}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -407,8 +419,8 @@ MonoBehaviour:
   obj: {fileID: 100000, guid: 47d603f786dac3e43a6e393b8f9625ae, type: 2}
   num: 100
   margin: 2
-  max: 5
-  min: -5
+  max: 100
+  min: -100
   offset_size: 1000
 --- !u!4 &1444238048
 Transform:

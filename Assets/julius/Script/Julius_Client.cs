@@ -32,17 +32,17 @@ public class Julius_Client : MonoBehaviour {
 	public			float			wait_time 		= 1;
 	public			float			timer 			= 0;
 		
-		//TCP/IP用
-	private 		   	bool 			connect 		= false;
-	private static 		TcpClient 		tcpip 			= null;
-	private static 		NetworkStream 		net;
-	private static 		string 			stream;
+	//TCP/IP用
+	private 		bool 			connect 		= false;
+	private 	 	TcpClient 		tcpip 			= null;
+	private  		NetworkStream 	net;
+	private  		string 			stream;
 	
 	//XML処理用
-	public 	static 		string 			tmp_s 			= "HogeHoge";
-	private static 		byte[] 			data 			= new byte[10000];
-	private static		Match 			sampling;
-	private static 		Regex 			xml_data;
+	public 	 		string 			tmp_s 			= "HogeHoge";
+	private  		byte[] 			data 			= new byte[10000];
+	private 		Match 			sampling;
+	private  		Regex 			xml_data;
 	
 	//外部プログラム用
 	private System.Diagnostics.Process julius_process;
@@ -64,6 +64,9 @@ public class Julius_Client : MonoBehaviour {
 		}
 		//juliusプロセスをjulius_processに登録
 		julius_process = System.Diagnostics.Process.Start(info);
+
+		if(julius_process.StartInfo == null)
+			Debug.Log(null);
 	}
 	
 	/*外部プログラムjulisのプロセスを強制終了*/
@@ -183,7 +186,7 @@ public class Julius_Client : MonoBehaviour {
 				}
 			}else{
 				tmp = tmp_s;
-				timer = 0;
+				timer_reset();
 			}
 			Result = tmp_s;
 		} else {
