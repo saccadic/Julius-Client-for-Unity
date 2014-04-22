@@ -3,10 +3,10 @@
 *Twitter : @Savant_Cat
 *
 *
-*             Julius client for Unity v1.3
+*             Julius client for Unity v1.2
 * 
 * 
-*                                                2014/4/22
+*                                                2014/4/15
 ***********************************************************/
 
 using UnityEngine;
@@ -26,7 +26,7 @@ public class Julius_Client : MonoBehaviour {
 	//初期設定用
 	public			microphone		mic = null;
 	public			bool			windowtype_hidden	= false;
-	public			string			program_name		= "julius_server.exe";
+	public			string			program_name	= "julius_server.exe";
 	public			string			file			= @".\Assets\julius\core";
 	public 			string 			IPAddress 		= "localhost";
 	public 			int 			port			= 10500;
