@@ -26,10 +26,12 @@ public class Julius_Client : MonoBehaviour {
 	//初期設定用
 	public			microphone		mic = null;
 	public			bool			windowtype_hidden	= false;
+	public			string			program_name	= "julius_server.exe";
+	public			string			file			= @".\Assets\julius\core";
 	public 			string 			IPAddress 		= "localhost";
 	public 			int 			port			= 10500;
 	public 			string			command			= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
-	public			float			wait_time 		= 1;
+	public			float			keep_time		= 0;
 	public			float			timer 			= 0;
 		
 	//TCP/IP用
@@ -37,16 +39,19 @@ public class Julius_Client : MonoBehaviour {
 	private 	 	TcpClient 		tcpip 			= null;
 	private  		NetworkStream 	net;
 	private  		string 			stream;
+	private			float			wait_time 		= 1;
 	
 	//XML処理用
-	public 	 		string 			tmp_s 			= "HogeHoge";
+	private 		string 			tmp 			= "";
+	public 	 		string 			words 			= "HogeHoge";
 	private  		byte[] 			data 			= new byte[10000];
 	private 		Match 			sampling;
 	private  		Regex 			xml_data;
 	
 	//外部プログラム用
 	private System.Diagnostics.Process julius_process;
-	
+	private			bool			run				= false;
+
 	//マルチスレッド用
 	private Thread julius_thread;
 	
@@ -54,19 +59,22 @@ public class Julius_Client : MonoBehaviour {
 
 	//---------------------------------julius.exe-------------------------------------------
 	/*外部プログラムjuliusをコマンド付きで起動*/
-	private void open_julius_server(){
+	private bool open_julius_server(){
 		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
-		info.FileName="julius_server.exe";
-		info.WorkingDirectory = @".\Assets\julius\core";
+		info.FileName = program_name;
+		info.WorkingDirectory = file;
 		info.Arguments = command;
 		if(windowtype_hidden){
 			info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 		}
 		//juliusプロセスをjulius_processに登録
-		julius_process = System.Diagnostics.Process.Start(info);
-
-		if(julius_process.StartInfo == null)
-			Debug.Log(null);
+		try{
+			julius_process = System.Diagnostics.Process.Start(info);
+		}catch(System.ComponentModel.Win32Exception w){
+			Debug.Log("Not Found." + w);
+			return false;
+		}
+		return true;
 	}
 	
 	/*外部プログラムjulisのプロセスを強制終了*/
@@ -123,11 +131,12 @@ public class Julius_Client : MonoBehaviour {
 			stream = System.Text.Encoding.Default.GetString(data);
 			//Debug.Log (stream);
 			
-			Debug.Log ("tmp_s : "+tmp_s);
-			tmp_s = "";//初期化
-			
+			Debug.Log ("tmp_s : "+words);
+
+			words = "";
+
 			//XMLデータから文字列の抽出
-			tmp_s = XML_search(stream);
+			words = XML_search(stream);
 		}
 	}
 	
@@ -149,13 +158,13 @@ public class Julius_Client : MonoBehaviour {
 		while(sampling.Success){//最後まで抽出
 			//結合処理
 			for(int i = 1;i<sampling.Groups.Count;i++){//なぜかi = 1にしたらうまく行った
-				tmp_s += sampling.Groups[i].Value;
+				words += sampling.Groups[i].Value;
 			}
 			//順次抽出していく
 			sampling = sampling.NextMatch();
 		}
 		//最終的に結合した文字列を返す
-		return tmp_s;
+		return words;
 	}
 	//---------------------------------------------------------------------
 
@@ -167,30 +176,38 @@ public class Julius_Client : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		//juliusサーバーを起動
-		open_julius_server();
-		
-		//juliusシステムの起動
-		StartCoroutine("start_julius_server");
+		run = open_julius_server();
+		//起動確認
+		if(run){
+			//juliusシステムの起動
+			StartCoroutine("start_julius_server");
+		}
 	}
-
-	private string tmp = "";
 
 	// Update is called once per frame
 	void Update () {
 		//結果を常に受け取る
-		if (connect) {
-			if(tmp == tmp_s){
-				timer += Time.deltaTime;
-				if(timer >= 5f){
-					tmp_s = "";
+		if (run) {
+			if (connect) {
+			/*
+				//wordsの利用時間
+				if(tmp == words){
+					timer += Time.deltaTime;
+					if(timer >= keep_time){
+						//初期化
+						words = "";
+					}
+				}else{
+					tmp = words;
+					timer_reset();
 				}
-			}else{
-				tmp = tmp_s;
-				timer_reset();
+			*/
+				Result = words;
+			} else {
+				Debug.Log ("Wait for response...");
 			}
-			Result = tmp_s;
 		} else {
-			Debug.Log("not conect.");
+			Debug.Log ("Error");
 		}
 	}
 	

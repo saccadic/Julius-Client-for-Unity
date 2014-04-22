@@ -10,14 +10,14 @@ public class Spectrum : MonoBehaviour {
 	public float 		margin 		=  1;
 	public float		offset_size = 10;
 
-	private AudioSource audio;
+	private AudioSource audio_data;
 	private GameObject[] clone;
 	private Vector3 size;
 	//private int count = 0;
 	
 	// Use this for initialization
 	void Start () {
-		audio = mic.GetComponent<AudioSource>();
+		audio_data = mic.GetComponent<AudioSource>();
 
 		size = obj.transform.localScale;
 		spectrum = new float[num];
@@ -31,7 +31,7 @@ public class Spectrum : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		spectrum = audio.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
+		spectrum = audio_data.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
 
 		for(int i=0;i<num;i++){
 			clone[i].transform.localScale = new Vector3(1,spectrum[i]*offset_size,1);

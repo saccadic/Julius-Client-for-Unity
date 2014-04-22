@@ -39,11 +39,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Result: 
-  windowtype_hidden: 0
+  mic: {fileID: 0}
+  windowtype_hidden: 1
+  program_name: julius_server.exe
+  file: .\Assets\julius\core
   IPAddress: localhost
   port: 10500
   command: -C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis
-  vol: 0
+  keep_time: 5
+  timer: 0
+  words: HogeHoge
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

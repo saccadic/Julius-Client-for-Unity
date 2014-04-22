@@ -134,9 +134,57 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 85eccbe98985e194d91b7d4c74174f26, type: 3}
+    - target: {fileID: 10200000, guid: 04e611a16df11e8459f2a108ecd8191b, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4284374622
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04e611a16df11e8459f2a108ecd8191b, type: 2}
   m_RootGameObject: {fileID: 2125027482}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1001 &364002679
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: mic
+      value: 
+      objectReference: {fileID: 1701621124}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+  m_RootGameObject: {fileID: 1735787060}
   m_IsPrefabParent: 0
   m_IsExploded: 1
 --- !u!1001 &992425872
@@ -540,7 +588,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-  m_PrefabInternal: {fileID: 1771780845}
+  m_PrefabInternal: {fileID: 364002679}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1735787062}
@@ -557,7 +605,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9,
     type: 2}
-  m_PrefabInternal: {fileID: 1771780845}
+  m_PrefabInternal: {fileID: 364002679}
   m_GameObject: {fileID: 1735787060}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -567,79 +615,25 @@ MonoBehaviour:
   Result: 
   mic: {fileID: 1701621124}
   windowtype_hidden: 1
+  program_name: julius_server.exe
+  file: .\Assets\julius\core
   IPAddress: localhost
   port: 10500
   command: -C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis
-  wait_time: 1
+  keep_time: 5
   timer: 0
+  words: HogeHoge
 --- !u!4 &1735787062
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-  m_PrefabInternal: {fileID: 1771780845}
+  m_PrefabInternal: {fileID: 364002679}
   m_GameObject: {fileID: 1735787060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!1001 &1771780845
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: windowtype_hidden
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: command
-      value: -C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8
-        sjis
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-      propertyPath: mic
-      value: 
-      objectReference: {fileID: 1701621124}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
-  m_RootGameObject: {fileID: 1735787060}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1001 &1894292290
 Prefab:
   m_ObjectHideFlags: 0
@@ -732,7 +726,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 85eccbe98985e194d91b7d4c74174f26, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284374622
 --- !u!23 &2125027485
 Renderer:
   m_ObjectHideFlags: 0

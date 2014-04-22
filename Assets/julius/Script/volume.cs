@@ -10,7 +10,7 @@ public class volume : MonoBehaviour {
 	public int		min 	= -1;
 	public float	offset_size = 0;
 
-	private AudioSource audio;
+	private AudioSource audio_data;
 	private GameObject[] clone;
 	private Vector3 size  = Vector3.zero;
 	private float vol = 0;
@@ -22,7 +22,7 @@ public class volume : MonoBehaviour {
 	{ 
 		float[] data = new float[256];
 		float a = 0;
-		audio.GetOutputData(data,0);
+		audio_data.GetOutputData(data,0);
 		
 		foreach(float s in data)
 		{
@@ -36,7 +36,7 @@ public class volume : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		audio = mic.GetComponent<AudioSource>();
+		audio_data = mic.GetComponent<AudioSource>();
 
 		size = obj.transform.localScale;
 		clone = new GameObject[num];
