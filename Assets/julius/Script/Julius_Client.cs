@@ -3,10 +3,10 @@
 *Twitter : @Savant_Cat
 *
 *
-*             Julius client for Unity v1.2
+*             Julius client for Unity v1.3
 * 
 * 
-*                                                2014/4/15
+*                                                2014/4/22
 ***********************************************************/
 
 using UnityEngine;
