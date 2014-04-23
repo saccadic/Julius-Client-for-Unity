@@ -1,4 +1,5 @@
-<h1>Julius-Client-for-Unity ver1.2</h1>
+<h1>Julius-Client-for-Unity ver1.3</h1>
+<h2>まだ未完成なのでDLしないでください</h2>
 <br>
 <br>
 <strong>使用ライブラリ</strong><br>
@@ -20,10 +21,6 @@ Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントパ�
 <strong>今後の予定</strong><br>
 <ul>
 <li>認識精度の向上</li>
-<li>結果の受け渡しの修正</li>
-<li>Editor拡張をして使いやすく</li>
-<li>変数名、関数名の見直し</li>
-<li>文字列に対して条件分岐する簡単なスクリプトの作成</li>
 <li>windows専用なので他のOSでも動くようにする</li>
 </ul>
 <br>
