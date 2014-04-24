@@ -1,7 +1,7 @@
 <h1>Julius-Client-for-Unity ver1.3</h1>
 <br>
 <br>
-パッケージデータ　-> <a href="" >Julius-Client-for-Unity.unitypackage</a>
+パッケージデータ　-> <a href="https://www.dropbox.com/s/akqozkkjjmcg4nu/Julius-Client-for-Unity.unitypackage" >Julius-Client-for-Unity.unitypackage</a>
 <br>
 <br>
 <strong>使用ライブラリ</strong><br>
