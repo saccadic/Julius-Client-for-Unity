@@ -129,7 +129,7 @@ public class Julius_Client : MonoBehaviour {
 			//ストリームの受信
 			net.Read(data, 0, data.Length);
 			stream = System.Text.Encoding.Default.GetString(data);
-			//Debug.Log (stream);
+			Debug.Log (stream);
 			
 			Debug.Log ("tmp_s : "+words);
 

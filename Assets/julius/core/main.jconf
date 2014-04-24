@@ -25,7 +25,8 @@
 ##
 ## 単語辞書ファイル
 ##
--v model/lang_m/bccwj.60k.htkdic
+##-v model/lang_m/bccwj.60k.htkdic
+-v model/lang_m/commnd.htkdic
 
 ##
 ## 音響HMM定義ファイル
