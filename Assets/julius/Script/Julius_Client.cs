@@ -3,10 +3,10 @@
 *Twitter : @Savant_Cat
 *
 *
-*             Julius client for Unity v1.2
+*             Julius client for Unity v1.3
 * 
 * 
-*                                                2014/4/15
+*                                                2014/4/24
 ***********************************************************/
 
 using UnityEngine;
@@ -18,22 +18,22 @@ using System.Text.RegularExpressions;
 using System.Text;
 
 public class Julius_Client : MonoBehaviour {
-	//--------------------変数---------------------------
+	//--------------------変数-----------------------------------------------------------
 	
 	//juliusからの結果用
 	public string 	Result;
 
 	//初期設定用
-	public			microphone		mic = null;
-	public			float			vol_line			= 0;		
+	//public			microphone		mic = null;
+	//public			float			vol_line			= 0;		
 	public			bool			windowtype_hidden	= false;
-	public			string			program_name	= "julius_server.exe";
-	public			string			file			= @".\Assets\julius\core";
-	public 			string 			IPAddress 		= "localhost";
-	public 			int 			port			= 10500;
-	public 			string			command			= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
-	public			float			keep_time		= 0;
-	public			float			timer 			= 0;
+	public			string			program_name		= "julius_server.exe";
+	public			string			file				= @".\Assets\julius\core";
+	public 			string 			IPAddress 			= "localhost";
+	public 			int 			port				= 10500;
+	public 			string			command				= "-C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis";
+	public			float			keep_time			= 0;
+	public			float			timer 				= 0;
 		
 	//TCP/IP用
 	private 		bool 			connect 		= false;
@@ -56,33 +56,11 @@ public class Julius_Client : MonoBehaviour {
 	//マルチスレッド用
 	private Thread julius_thread;
 	
-	//--------------------------------------------------
+	//-------------------------------------------------------------------------------------
 
-	//---------------------------------julius.exe-------------------------------------------
-	//すでにjulius_server.exeが起動していないか確認
-	private bool check_process(){
-		System.Diagnostics.Process[] ps;
-		try{
-			ps = System.Diagnostics.Process.GetProcessesByName("julius_server");
-		}catch(System.ComponentModel.Win32Exception w){
-			Debug.Log("Not Found." + w);
-			return false;
-		}
-
-		Debug.Log(ps.Length);
-		if(ps.Length > 0){
-			Debug.Log("Already run julius_server.exe!!");
-			for(int i=0;i<ps.Length;i++){
-				ps[i].Kill();
-			}
-		}
-
-		return true;
-	}
-
+	//---------------------------------julius.exe------------------------------------------
 	/*外部プログラムjuliusをコマンド付きで起動*/
 	private bool open_julius_server(){
-		//check_process ();
 		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
 		info.FileName = program_name;
 		info.WorkingDirectory = file;
@@ -149,7 +127,7 @@ public class Julius_Client : MonoBehaviour {
 	}
 	//--------------------------------------------------------------------
 	
-	//-----------------------------Stream----------------------------------
+	//-----------------------------Stream---------------------------------
 	/*juliusサーバーから受信*/
 	private void get_stream(){//**マルチスレッド関数**
 		while(true){
@@ -195,13 +173,9 @@ public class Julius_Client : MonoBehaviour {
 		//最終的に結合した文字列を返す
 		return words;
 	}
-	//---------------------------------------------------------------------
+	//--------------------------------------------------------------
 
-	private void timer_reset(){
-		timer = 0f;
-	}
-
-	//----------------------Main---------------------------
+	//--------------------------Main--------------------------------
 	// Use this for initialization
 	void Start() {
 		//juliusサーバーを起動
@@ -218,28 +192,7 @@ public class Julius_Client : MonoBehaviour {
 		//結果を常に受け取る
 		if (run) {
 			if (connect) {
-			/*
-				//wordsの利用時間
-				if(tmp == words){
-					timer += Time.deltaTime;
-					if(timer >= keep_time){
-						//初期化
-						words = "";
-					}
-				}else{
-					tmp = words;
-					timer_reset();
-				}
-*/
 				Result = words;
-				/*
-				if(mic.vol > vol_line){
-
-					//words = "";
-				}else{
-					//words = "";
-				}
-				*/
 			} else {
 				Debug.Log ("Wait for response...");
 			}
@@ -257,5 +210,5 @@ public class Julius_Client : MonoBehaviour {
 			julius_thread.Abort(); 
 		}
 	}
-	//-----------------------------------------------------
+	//-------------------------------------------------------------
 }
