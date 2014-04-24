@@ -20,6 +20,7 @@ Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアント(Win
 <br>
 <strong>使い方</strong><br>
 prefabファイル内のJulius_clientをシーンに入れれば使えます。初回起動時にネットワークのセキュリティについて聞かれますがTCP/IP経由で結果を取得する関係状必要なので許可してください。Julius_client内のスクリプトではResultというstring変数に常に認識結果を入力しているので別のスクリプトで利用する時はアタッチするかして使ってください。サンプルシーンもあるので参考にしてください。<br>
+<br>
 <strong>今後の予定</strong><br>
 <ul>
 <li>認識精度の向上</li>
