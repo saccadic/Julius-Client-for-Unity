@@ -60,19 +60,29 @@ public class Julius_Client : MonoBehaviour {
 
 	//---------------------------------julius.exe-------------------------------------------
 	//すでにjulius_server.exeが起動していないか確認
-	private void check_process(){
-		System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName("julius_server");
+	private bool check_process(){
+		System.Diagnostics.Process[] ps;
+		try{
+			ps = System.Diagnostics.Process.GetProcessesByName("julius_server");
+		}catch(System.ComponentModel.Win32Exception w){
+			Debug.Log("Not Found." + w);
+			return false;
+		}
+
+		Debug.Log(ps.Length);
 		if(ps.Length > 0){
 			Debug.Log("Already run julius_server.exe!!");
 			for(int i=0;i<ps.Length;i++){
 				ps[i].Kill();
 			}
 		}
+
+		return true;
 	}
 
 	/*外部プログラムjuliusをコマンド付きで起動*/
 	private bool open_julius_server(){
-		check_process ();
+		//check_process ();
 		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
 		info.FileName = program_name;
 		info.WorkingDirectory = file;
@@ -94,7 +104,13 @@ public class Julius_Client : MonoBehaviour {
 	private void kill_julius_server(){
 		//プロセスの強制終了
 		julius_process.Kill();
-		Debug.Log("Kill julius server.");
+		if (julius_process.HasExited) {
+			Debug.Log("Kill julius server.");
+		} else {
+			julius_process.Kill();
+		}
+		julius_process.Close();
+		julius_process.Dispose();
 	}
 
 	/*juliusサーバーへ接続する*/
@@ -128,7 +144,7 @@ public class Julius_Client : MonoBehaviour {
 	private IEnumerator start_julius_server(){
 		Debug.Log ("Julius Initialize...");
 		yield return new WaitForSeconds(wait_time);
-		Debug.Log ("START JuliusSystem!");
+		Debug.Log ("Connect start");
 		connect = initialize_julius_client();
 	}
 	//--------------------------------------------------------------------
@@ -214,13 +230,16 @@ public class Julius_Client : MonoBehaviour {
 					tmp = words;
 					timer_reset();
 				}
-			*/
+*/
+				Result = words;
+				/*
 				if(mic.vol > vol_line){
-					Result = words;
-					words = "";
+
+					//words = "";
 				}else{
 					//words = "";
 				}
+				*/
 			} else {
 				Debug.Log ("Wait for response...");
 			}
