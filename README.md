@@ -1,7 +1,7 @@
 <h1>Julius-Client-for-Unity ver1.3</h1>
 <br>
 <br>
-パッケージデータ　-> <a href="https://www.dropbox.com/s/akqozkkjjmcg4nu/Julius-Client-for-Unity.unitypackage" >Julius-Client-for-Unity.unitypackage</a>
+パッケージデータ（240MB以上あるので注意）-> <a href="https://www.dropbox.com/s/akqozkkjjmcg4nu/Julius-Client-for-Unity.unitypackage" >Julius-Client-for-Unity.unitypackage</a>
 <br>
 <br>
 <strong>使用ライブラリ</strong><br>
@@ -9,11 +9,11 @@ Julius v4.3.1 <a href = "http://julius.sourceforge.jp/">リンク</a><br>
 <br>
 <strong>初めに</strong><br>
 C#経験1ヶ月、unity経験2ヶ月,github経験1週間の全てにおいて初心者の私がUnityを通して勉強するために書いたコードですのでアドバイスを頂ければ助かります。アドバイスは@Savant_Catに送ってくださると嬉しいです。
-スクリプトのライセンスは<a href = "https://github.com/SavantCat/Julius-Client-for-Unity/blob/master/Assets/julius/Script/LICENSE.txt">MIT</a>、<br>
+スクリプトのライセンスは<a href = "https://github.com/SavantCat/Julius-Client-for-Unity/blob/master/Assets/julius/Script/LICENSE.txt">MIT</a>、
 Juliusのライセンスは<a href ="http://julius.sourceforge.jp/index.php?q=license.html">こちらに従います</a><br>
 <br>
 <strong>概要</strong><br>
-Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアント(Windows専用)<br>
+Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントスクリプト(Windows専用)<br>
 <br>
 <strong>機能</strong><br>
 1.juliusをuntiy側からmoduleモードで起動する<br>
