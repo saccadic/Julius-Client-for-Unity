@@ -18,13 +18,14 @@ using System.Text.RegularExpressions;
 using System.Text;
 
 public class Julius_Client : MonoBehaviour {
-	//--------------------------------------------------
+	//--------------------変数---------------------------
 	
 	//juliusからの結果用
 	public string 	Result;
 
 	//初期設定用
 	public			microphone		mic = null;
+	public			float			vol_line			= 0;		
 	public			bool			windowtype_hidden	= false;
 	public			string			program_name	= "julius_server.exe";
 	public			string			file			= @".\Assets\julius\core";
@@ -58,8 +59,20 @@ public class Julius_Client : MonoBehaviour {
 	//--------------------------------------------------
 
 	//---------------------------------julius.exe-------------------------------------------
+	//すでにjulius_server.exeが起動していないか確認
+	private void check_process(){
+		System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName("julius_server");
+		if(ps.Length > 0){
+			Debug.Log("Already run julius_server.exe!!");
+			for(int i=0;i<ps.Length;i++){
+				ps[i].Kill();
+			}
+		}
+	}
+
 	/*外部プログラムjuliusをコマンド付きで起動*/
 	private bool open_julius_server(){
+		check_process ();
 		System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo();
 		info.FileName = program_name;
 		info.WorkingDirectory = file;
@@ -83,7 +96,7 @@ public class Julius_Client : MonoBehaviour {
 		julius_process.Kill();
 		Debug.Log("Kill julius server.");
 	}
-	
+
 	/*juliusサーバーへ接続する*/
 	private bool initialize_julius_client(){
 		//TCP/IPの初期化＆juliusサーバーへ接続
@@ -202,7 +215,12 @@ public class Julius_Client : MonoBehaviour {
 					timer_reset();
 				}
 			*/
-				Result = words;
+				if(mic.vol > vol_line){
+					Result = words;
+					words = "";
+				}else{
+					//words = "";
+				}
 			} else {
 				Debug.Log ("Wait for response...");
 			}
