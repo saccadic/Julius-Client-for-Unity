@@ -221,6 +221,7 @@ public class Julius_Client : MonoBehaviour {
 				}else{
 					Result = string.Empty;
 				}
+
 			} else {
 				Debug.Log ("Wait for response...");
 			}

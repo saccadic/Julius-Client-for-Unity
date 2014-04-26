@@ -115,7 +115,7 @@ Prefab:
       objectReference: {fileID: 1701621123}
     - target: {fileID: 11400000, guid: 75d6b980da49e284fa21cf925a61f621, type: 2}
       propertyPath: offset_size
-      value: 1000
+      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75d6b980da49e284fa21cf925a61f621, type: 2}
@@ -275,7 +275,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1ce85978a0fa44b4aa34e4d654ee6fbd, type: 2}
       propertyPath: offset_size
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1ce85978a0fa44b4aa34e4d654ee6fbd, type: 2}
       propertyPath: num
@@ -318,7 +318,7 @@ MonoBehaviour:
   obj: {fileID: 100000, guid: 89eaee8d61baa9240aa1b6b586b99b27, type: 2}
   spectrum: []
   margin: 1
-  offset_size: 1000
+  offset_size: 3000
 --- !u!4 &1416235336
 Transform:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   margin: 1
   max: 10
   min: -10
-  offset_size: 100
+  offset_size: 500
 --- !u!4 &1444238048
 Transform:
   m_ObjectHideFlags: 0
@@ -418,6 +418,15 @@ Prefab:
     - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
       propertyPath: windowtype_hidden
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: command
+      value: -C vocabulary.jconf -C am-gmm.jconf -input mic -48 -module -charconv
+        utf-8 sjis
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
+      propertyPath: sentence_mode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf300a02bcddb374b9d4af5795dc09b9, type: 2}
@@ -562,7 +571,8 @@ MonoBehaviour:
   file: .\Assets\julius\core
   IPAddress: localhost
   port: 10500
-  command: -C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis
+  command: -C vocabulary.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8
+    sjis
   keep_time: 5
   timer: 0
   regular: "WORD=\"([^\u3002\"]+)\""

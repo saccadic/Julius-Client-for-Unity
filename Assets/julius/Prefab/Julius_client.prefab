@@ -103,9 +103,11 @@ MonoBehaviour:
   file: .\Assets\julius\core
   IPAddress: localhost
   port: 10500
-  command: -C main.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8 sjis
+  command: -C command.jconf -C am-gmm.jconf -input mic -48 -module -charconv utf-8
+    sjis
   keep_time: 5
   timer: 0
+  regular: "WORD=\"([^\u3002\"]+)\""
   words: 
 --- !u!1001 &100100000
 Prefab:
