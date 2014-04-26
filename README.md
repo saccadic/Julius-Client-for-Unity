@@ -24,7 +24,7 @@ Juliusのライセンスは<a href ="http://julius.sourceforge.jp/index.php?q=li
 <strong>使い方</strong><br>
 <ul>
 <li>prefabファイル内のJulius_clientをシーンに入れれば使えます。初回起動時にネットワークのセキュリティについて聞かれますがTCP/IP経由で結果を取得する関係上必要なので許可してください。Julius_client内のスクリプトではResultというstring変数に常に認識結果を入力しているので別のスクリプトで利用する時はアタッチするかして使ってください。サンプルシーンもあるので参考にしてください。</li>
-<li>実際に認識する言葉はAssets\julius\core\model\lang_m内にある"commnd.htkdic"というファイルです。編集方法は<a href = "http://shower.human.waseda.ac.jp/~m-kouki/pukiwiki_public/24.html#b5453414">こちら</a>を参考にしてください。（言語モデルの章にあります。）また、"bccwj.60k.htkdic"には多くの語彙が収録されているので書き方の参考になると思います。</li>
+<li>実際に認識する言葉はAssets\julius\core\model\lang_m内にある"commnd.htkdic"というファイルに記述されています。編集方法は<a href = "http://shower.human.waseda.ac.jp/~m-kouki/pukiwiki_public/24.html#b5453414">こちら</a>を参考にしてください。（言語モデルの章にあります。）また、"commnd.htkdic"は"bccwj.60k.htkdic"を元に作ったものです。"bccwj.60k.htkdic"には多くの語彙が収録されているので書き方の参考になると思います。</li>
 <li>windowtype_hiddenを有効にするとウィンドウが表示されず裏で処理してくれます。</li>
 </ul>
 <br>
