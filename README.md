@@ -5,7 +5,7 @@
 <br>
 <br>
 <strong>使用ライブラリ</strong><br>
-Julius v4.3.1 <a href = "http://julius.sourceforge.jp/">リンク</a><br>
+大語彙連続音声認識エンジン Julius v4.3.1 <a href = "http://julius.sourceforge.jp/">リンク</a><br>
 <br>
 <strong>初めに</strong><br>
 C#経験1ヶ月、unity経験2ヶ月,github経験1週間の全てにおいて初心者の私がUnityを通して勉強するために書いたコードですのでアドバイスを頂ければ助かります。アドバイスは@Savant_Catに送ってくださると嬉しいです。
