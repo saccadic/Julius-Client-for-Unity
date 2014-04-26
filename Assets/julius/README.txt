@@ -19,6 +19,7 @@ Julius v4.3.1 のmoduleモードをUnityで扱うためのクライアントスクリプトです(Window
 使い方
 ・prefabファイル内のJulius_clientをシーンに入れれば使えます。初回起動時にネットワークのセキュリティについて聞かれますがTCP/IP経由で結果を取得する関係状必要なので許可してください。Julius_client内のスクリプトではResultというstring変数に常に認識結果を入力しているので別のスクリプトで利用する時はアタッチ？するかして使ってください。サンプルシーンもあるので参考にしてください。
 ・実際に認識する言葉はAssets\julius\core\model\lang_m内にある"commnd.htkdic"というファイルです。編集方法はこちらを参考にしてください。（言語モデルの章あります）http://shower.human.waseda.ac.jp/~m-kouki/pukiwiki_public/24.html#b5453414　また、"bccwj.60k.htkdic"には多くの語彙が収録されているので参考になると思います。
+・windowtype_hiddenを有効にするとウィンドウが表示されず裏で処理してくれます。
 
 最後に
 juliusの認識精度を上げるために辞典内の語彙を必要最低限にしています。これはjuliusの本来の実力が発揮できないと思うので現状はjuliusを使ってコマンド入力機能をunityに追加するインターフェースのようなものと考えています。

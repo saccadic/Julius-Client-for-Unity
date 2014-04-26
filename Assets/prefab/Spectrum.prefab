@@ -35,14 +35,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1efab9e9d0123744da4e71bb548006a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7235594740878564dbfe5083f5b18a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mic: {fileID: 0}
-  obj: {fileID: 100000, guid: 47d603f786dac3e43a6e393b8f9625ae, type: 2}
+  obj: {fileID: 100000, guid: 89eaee8d61baa9240aa1b6b586b99b27, type: 2}
   spectrum: []
   margin: 1
-  offset_size: 500
+  offset_size: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
