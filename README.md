@@ -1,6 +1,7 @@
 <h1>Julius-Client-for-Unity ver1.3</h1>
 <br>
 <br>
+<strong>unitypackage</strong><br>
 パッケージデータ（240MB以上あるので注意）-> <a href="https://www.dropbox.com/s/akqozkkjjmcg4nu/Julius-Client-for-Unity.unitypackage" >Julius-Client-for-Unity.unitypackage</a>
 <br>
 <br>
