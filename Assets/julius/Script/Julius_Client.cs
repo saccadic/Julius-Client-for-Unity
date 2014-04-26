@@ -192,7 +192,13 @@ public class Julius_Client : MonoBehaviour {
 		//結果を常に受け取る
 		if (run) {
 			if (connect) {
-				Result = words;
+				//Debug.Log ("tmp : "+tmp+" "+"word : "+words+" Result : "+Result);
+				if(tmp != words){
+					words  = tmp;
+					Result = tmp;
+				}else{
+					Result = string.Empty;
+				}
 			} else {
 				Debug.Log ("Wait for response...");
 			}
