@@ -1,13 +1,11 @@
 ﻿/********************************************************* 
-*Author : Katuyoshi Hotta
-*Twitter : @Savant_Cat
-*
-*
-*             Julius client for Unity v1.3
-* 
-* 
-*                                                2014/4/24
-***********************************************************/
+ * [Module julius client]
+ * Copyright (c) [2014] [Katsuyoshi hotta]
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ *                                         更新日：2014/4/26
+ *********************************************************/
 
 using UnityEngine;
 using System.Collections;
