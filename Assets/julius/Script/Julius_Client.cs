@@ -20,7 +20,8 @@ public class Julius_Client : MonoBehaviour {
 	
 	//juliusからの結果用
 	public string 	Result;
-
+	public string	message;
+	public	int return_num = 0;
 	//初期設定用
 	//public			microphone		mic = null;
 	//public			float			vol_line			= 0;		
@@ -72,6 +73,8 @@ public class Julius_Client : MonoBehaviour {
 			julius_process = System.Diagnostics.Process.Start(info);
 		}catch(System.ComponentModel.Win32Exception w){
 			Debug.Log("Not Found." + w);
+			message = "Not Found.";
+			return_num = 0;
 			return false;
 		}
 		return true;
@@ -83,6 +86,8 @@ public class Julius_Client : MonoBehaviour {
 		julius_process.Kill();
 		if (julius_process.HasExited) {
 			Debug.Log("Kill julius server.");
+			message = "Kill julius server.";
+			return_num = 1;
 		} else {
 			julius_process.Kill();
 		}
@@ -97,9 +102,13 @@ public class Julius_Client : MonoBehaviour {
 		//クライアントが取得出来たかどうか
 		if (tcpip == null) {
 			Debug.Log("Connect Fall.");
+			message = "Connect Fall.";
+			return_num = 0;
 			return false;
 		} else {
 			Debug.Log("Connect Success.");
+			message = "Connect Success.";
+			return_num = 1;
 			//ストリームの取得
 			net = tcpip.GetStream ();
 			//マルチスレッドへ登録＆開始
@@ -120,8 +129,12 @@ public class Julius_Client : MonoBehaviour {
 	/*サーバーが起動するまで時間があるので少し待つ*/
 	private IEnumerator start_julius_server(){
 		Debug.Log ("Julius Initialize...");
+		message = "Julius Initialize...";
+		return_num = 1;
 		yield return new WaitForSeconds(wait_time);
 		Debug.Log ("Connect start");
+		message = "Connect start";
+		return_num = 1;
 		connect = initialize_julius_client();
 	}
 	//--------------------------------------------------------------------
@@ -151,7 +164,7 @@ public class Julius_Client : MonoBehaviour {
 		byte[] send_byte = Encoding.UTF8.GetBytes(msg);
 		//ストリームの送信
 		net.Write(send_byte,0,send_byte.Length);
-		Debug.Log ("Send Message -> "+msg);
+		//Debug.Log ("Send Message -> "+msg);
 	}
 	
 	/*ストリーム情報から正規表現を利用して文字列を抽出する*/
@@ -213,6 +226,8 @@ public class Julius_Client : MonoBehaviour {
 				//Result = words;
 
 				Debug.Log ("tmp : "+tmp+" "+"word : "+words+" Result : "+Result);
+				message = "Ready!";
+				return_num = 1;
 				if(tmp != words){
 					words  = tmp;
 					Result = tmp;
@@ -222,9 +237,13 @@ public class Julius_Client : MonoBehaviour {
 
 			} else {
 				Debug.Log ("Wait for response...");
+				message = "Wait for response...";
+				return_num = 1;
 			}
 		} else {
 			Debug.Log ("Error");
+			message = "Error";
+			return_num = 0;
 		}
 	}
 	
