@@ -2,7 +2,7 @@
 <br>
 <br>
 <strong>unitypackage</strong><br>
-パッケージデータ（240MB以上あるので注意,まぁプロジェクト全体は660MB以上あるけど...）-> <a href="https://www.dropbox.com/s/akqozkkjjmcg4nu/Julius-Client-for-Unity.unitypackage" >Julius-Client-for-Unity.unitypackage</a>
+パッケージデータ（240MB以上あるので注意,まぁプロジェクト全体は660MB以上あるけど...）-> <a href="https://www.dropbox.com/t/32uIqmrN7CuInQUJ" >Julius-Client-for-Unity.unitypackage</a>
 <br>
 <br>
 <strong>使用ライブラリ</strong><br>
